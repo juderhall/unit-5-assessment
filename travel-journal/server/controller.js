@@ -235,11 +235,11 @@ module.exports = {
     },
 
     getCountries: (req, res) => {
-        sequilize.query(`
-            RETURNS TABLE name  
-        `).then(() => {
-            console.log('DB seeded!')
-            res.sendStatus(200)
-        }).catch(err => console.log('error seeding DB', err))
+        sequelize.query(`
+            SELECT name FROM countries
+        `).then((dbRes) => {
+            console.log(dbRes)
+            res.status(200).send(dbRes[0])
+        }).catch(err => console.log('This is not working', err))
     }
 }
