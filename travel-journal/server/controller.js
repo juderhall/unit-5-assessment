@@ -31,7 +31,6 @@ module.exports = {
                         REFERENCES countries(country_id)
             );
 
-
             insert into countries (name)
             values ('Afghanistan'),
             ('Albania'),
@@ -241,5 +240,24 @@ module.exports = {
             console.log(dbRes)
             res.status(200).send(dbRes[0])
         }).catch(err => console.log('This is not working', err))
+    },
+
+    createCity : (req, res) => {
+        let {
+            city_name,
+            country_id,
+            rating
+        } = req.body
+
+        console.log(city_name)
+        console.log(country_id)
+        console.log(rating)
+
+        sequelize.query(`
+            INSERT INTO cities (city_name, rating, country_id) 
+            VALUES ('${city_name}','${rating}','${country_id}')
+        `)
+
+        console.log
     }
 }
