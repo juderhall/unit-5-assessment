@@ -267,7 +267,6 @@ module.exports = {
         JOIN countries
         ON cities.country_id = countries.country_id
         `).then((dbRes) => {
-            console.log(dbRes)
             res.status(200).send(dbRes[0])
         })
     },
@@ -276,7 +275,7 @@ module.exports = {
         const {id} = req.params
         sequelize.query(`
             DELETE FROM cities 
-            WHERE cities.id = ${id}
+            WHERE city_id = ${id}
         `).then((dbRes) => {
             res.status(200).send(dbRes[0])
         })
