@@ -247,6 +247,8 @@ module.exports = {
             rating,
             countryId,
         } = req.body
+
+        //console.log(req.body)
         
         console.log(name + rating + countryId)
 
@@ -270,15 +272,22 @@ module.exports = {
         })
 
         // sequelize.query(`
-        //     SELECT * FROM cities
+        //     SELECT city.country_Id, city.name, city.rating, country.country_id, country.name
+        //     FROM cities AS city
+        //     JOIN countries AS country
+        //     WHERE city.country_Id = country.country_Id
         // `).then((dbRes) => {
+        //     console.log(dbRes[0])
         //     res.status(200).send(dbRes[0])
         // })
     },
 
     // deleteCity: (req, res) => {
 
-    // }.then((dbRes) => {
-    //     res.status(200).send(dbRes[0])
-    //  })
+        sequelize.query(`
+            SELECT * FROM cities
+        `).then((dbRes) => {
+            res.status(200).send(dbRes[0])
+        })
+    }
 }
